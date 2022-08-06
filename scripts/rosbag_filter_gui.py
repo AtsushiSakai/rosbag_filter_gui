@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import sys
 from SimplePyQtGUIKit import SimplePyQtGUIKit
-from PyQt4 import QtGui
+from PyQt5 import QtWidgets
 import rosbag
 import subprocess
 
@@ -11,7 +11,7 @@ def GetTopicList(path):
     topics = bag.get_type_and_topic_info()[1].keys()
     types=[]
     for i in range(0,len(bag.get_type_and_topic_info()[1].values())):
-        types.append(bag.get_type_and_topic_info()[1].values()[i][0])
+        types.append(list(bag.get_type_and_topic_info()[1].values())[i][0])
 
     results=[]    
     for to,ty in zip(topics,types):
@@ -22,7 +22,7 @@ def GetTopicList(path):
     return results
 
 def main():
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
 
     #GetFilePath
     files=SimplePyQtGUIKit.GetFilePath(isApp=True,caption="Select bag file",filefilter="*bag")
@@ -49,8 +49,8 @@ def main():
     p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout_data, stderr_data = p.communicate()
 
-    QtGui.QMessageBox.information(QtGui.QWidget(), "Message", "Finish Convert!!")
+    QtWidgets.QMessageBox.information(QtWidgets.QWidget(), "Message", "Finish Convert!!")
 
 if __name__ == '__main__':
-    print "rosbag_filter_gui start!!"
+    print("rosbag_filter_gui start!!")
     main()
