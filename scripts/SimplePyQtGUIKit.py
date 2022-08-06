@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-from PyQt4.QtGui  import *
+from PyQt5.QtWidgets import *
 import sys
 
 class SimplePyQtGUIKit:
@@ -15,11 +15,11 @@ class SimplePyQtGUIKit:
         """
 
         if not isApp:
-          app = QApplication(sys.argv)
+            app = QApplication(sys.argv)
         files=QFileDialog.getOpenFileNames(caption=caption,filter=filefilter)
 
         strlist=[]
-        for file in files:
+        for file in files[0]:
             strlist.append(str(file))
 
         return strlist
@@ -42,7 +42,7 @@ class SimplePyQtGUIKit:
         layout=QGridLayout()
         layoutIndex=0
 
-        if msg is not "":
+        if msg != "":
             label = QLabel(msg)
             layout.addWidget(label,layoutIndex,0)
             layoutIndex=layoutIndex+1
@@ -75,6 +75,6 @@ if __name__ == '__main__':
     #  optList=SimplePyQtGUIKit.GetCheckButtonSelect(["sample a","sample b","sample c"], title="Select sample", msg="Please select sample")
     #  print optList
     filePath=SimplePyQtGUIKit.GetFilePath(caption=u"Select files",filefilter="*py")
-    print filePath
+    print(filePath)
 
 
